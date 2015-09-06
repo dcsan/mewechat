@@ -1,13 +1,14 @@
 ActiveChats = React.createClass({
+    // mixins: [ReactiveMixin, DDPMixin],
 
     render() {
 
         var list = ChatList.find({}).fetch();
         console.log("found chatList:", list.length);
 
-        var chatId = 101;
-        
-        var logs = ChatLogs.find({chatId: chatId}).fetch();
+        var chatId = FlowRouter.getParam('chatId');
+
+        var logs = ChatLogs.find({chatId}).fetch();
         console.log("found ChatLogs:", chatId, logs.length);
 
         var chatList = list.map( elem => {
