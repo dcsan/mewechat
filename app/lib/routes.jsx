@@ -1,4 +1,4 @@
-FlowRouter.route("/admin", {
+FlowRouter.route("/", {
     name: "admin",
     action(params) {
         ReactLayout.render(Admin);
@@ -24,5 +24,14 @@ FlowRouter.route("/OneChat/:chatId?", {
     name: "admin",
     action(params) {
         ReactLayout.render(OneChat);
+    }
+});
+
+
+
+FlowRouter.route("/players/:chatId?", {
+    name: "players",
+    action(params) {
+        ReactLayout.render(PlayerList);
     }
 });
