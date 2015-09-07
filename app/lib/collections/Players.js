@@ -5,6 +5,15 @@ if (Meteor.isServer) {
     Meteor.startup( function() {
 
         console.log("server startup");
+
+	Meteor.publish("NewPlayers", function(opts) {
+            opts = opts || {};
+            opts.limit = opts.limit || 20;
+            opts.sort = {updated_at: -1} ;
+            console.log("sub: NewPlayers", opts);
+            return Players.find({}, opts);
+        })
+
         Meteor.publish("players", function(opts={}) {
             console.log("sub: players");
             return Players.find(opts,

@@ -2,7 +2,7 @@ PlayerList = React.createClass({
     mixins: [ReactMeteorData],
 
     getMeteorData() {
-        Meteor.subscribe('players', {} );
+        Meteor.subscribe('NewPlayers', {limit: 20} );
 
         return {
             players: Players.find({},
@@ -14,19 +14,24 @@ PlayerList = React.createClass({
 
     render() {
 
+        console.log("player ex", this.data.players[0]);
+        var c = 0;
         var playerList = this.data.players.map( elem => {
+            c++;
             // if (elem.chatId == chatId) {
             //     buttonClass += " button-primary"
             // }
             var dwell = Math.floor((elem.updated_at - elem.created_at)/(60*60)) || 0;
-            console.log(elem);
+            // console.log(elem);
             return (
-                <tr>
+                <tr key={elem._id}>
+                    <td>{c}</td>
                     <td>{elem.username}</td>
                     <td>{elem.userId}</td>
                     <td>{elem.bot}</td>
                     <td>{elem.hits}</td>
                     <td>{dwell}</td>
+                    <td>{elem.group ? "⚫️" : "⚪️" }</td>
                 </tr>
             )
         });
@@ -39,11 +44,13 @@ PlayerList = React.createClass({
                         <table className='u-full-width'>
                         <thead>
                         <tr>
+                            <th>#</th>
                             <th>username</th>
                             <th>userId</th>
                             <th>bot</th>
                             <th>hits</th>
                             <th>dwell</th>
+                            <th>group</th>
                         </tr>
                         </thead>
                         <tbody>
