@@ -17,7 +17,16 @@ if (Meteor.isServer) {
             {
                 chatId: 102,
                 t: "chat num 102",
+            },
+            {
+                chatId: 102,
+                t: "another 102",
+            },
+            {
+                chatId: 102,
+                t: "102 has lots of text",
             }
+
         ]
         logs.map( log => {
             ChatLogs.insert(log);

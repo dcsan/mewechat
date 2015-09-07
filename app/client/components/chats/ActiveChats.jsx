@@ -1,19 +1,25 @@
 ActiveChats = React.createClass({
-    // mixins: [ReactiveMixin, DDPMixin],
+    mixins: [ReactMeteorData],
+
+    getMeteorData() {
+        Meteor.subscribe('ChatList');
+
+        return {
+            activeChats: ChatList.find({}).fetch()
+        }
+    },
 
     render() {
 
-        var list = ChatList.find({}).fetch();
-        console.log("found chatList:", list.length);
-
         var chatId = FlowRouter.getParam('chatId');
 
-        var logs = ChatLogs.find({chatId}).fetch();
-        console.log("found ChatLogs:", chatId, logs.length);
-
-        var chatList = list.map( elem => {
+        var chatList = this.data.activeChats.map( elem => {
+            var buttonClass = 'button u-full-width';
+            if (elem.chatId == chatId) {
+                buttonClass += " button-primary"
+            }
             return (
-                <a key={elem._id} className='button u-full-width' href={elem.chatId}>
+                <a key={elem._id} className={buttonClass} href={elem.chatId}>
                 {elem.chatId}
                 {elem.link}
                 </a>

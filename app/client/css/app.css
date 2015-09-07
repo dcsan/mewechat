@@ -1,0 +1,11 @@
+.chatrow {
+    border-top: 1px solid #ccc;
+    padding: 5px;
+}
+
+.chatinfo {
+    border: 1px solid #ccc;
+    background-color: #222;
+    color: white;
+    padding: 5px;
+}
